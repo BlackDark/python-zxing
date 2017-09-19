@@ -13,8 +13,15 @@ You'll neeed to have a recent Java binary somewhere in your path.
 Use the Python 3 version of pip (usually invoked via `pip3`) to install:
 
 ```sh
-$ pip3 install https://github.com/dlenski/python-zxing/archive/master.zip    # Latest version
-$ pip3 install https://github.com/dlenski/python-zxing/archive/0.5.zip       # Tagged release
+$ pip3 install https://github.com/%USER%/python-zxing/archive/master.zip    # Latest version
+$ pip3 install https://github.com/%USER%/python-zxing/archive/0.5.zip       # Tagged release
+...
+```
+
+For example:
+```sh
+$ pip3 install https://github.com/BlackDark/python-zxing/archive/master.zip    # Latest version
+$ pip3 install https://github.com/BlackDark/python-zxing/archive/0.5.zip       # Tagged release
 ...
 ```
 
