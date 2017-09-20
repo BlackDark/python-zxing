@@ -9,9 +9,10 @@
 from __future__ import print_function
 
 import pathlib
+import platform
 from enum import Enum
 
-__version__ = '0.4'
+__version__ = '0.5'
 import subprocess as sp, re, os
 
 
@@ -27,15 +28,22 @@ class BarCodeReader(object):
     else:
       self.classpath = os.path.join(os.path.dirname(__file__), 'java', '*')
 
+  def _to_system_file_path(self, file_path):
+    if platform.system() == "Windows":
+      # In case of windows we need the URI for zxing jar
+      return pathlib.Path(os.path.abspath(file_path)).as_uri()
+    else:
+      return os.path.abspath(file_path)
+
   def decode(self, filenames, try_harder=False, possible_formats=None):
     possible_formats = (possible_formats,) if isinstance(possible_formats, str) else possible_formats
 
     if isinstance(filenames, str):
       one_file = True
-      filenames = [pathlib.Path(os.path.abspath(filenames)).as_uri()]
+      filenames = [self._to_system_file_path(filenames)]
     else:
       one_file = False
-      filenames = [pathlib.Path(os.path.abspath(f)).as_uri() for f in filenames]
+      filenames = [self._to_system_file_path(f) for f in filenames]
 
     cmd = [self.java, '-cp', self.classpath, self.cls] + filenames
 
